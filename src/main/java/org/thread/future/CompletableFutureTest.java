@@ -13,7 +13,37 @@ import java.util.concurrent.Executors;
  **/
 public class CompletableFutureTest {
 
-  public static void main(String[] args) {
+  // https://blog.csdn.net/u011726984/article/details/79320004
+  public static void main(String[] args) throws Exception {
+    demo1();
+    demo2();
+    demo3();
+  }
+
+  private static void demo1() {
+    CompletableFuture.supplyAsync(() -> "Hello").thenApply(s -> s + " world").thenApply(String::toUpperCase)
+        .thenCombine(CompletableFuture.completedFuture("Java"), (s1, s2) -> s1 + s2).thenAccept(System.out::println);
+
+  }
+
+  private static void demo2() {
+    CompletableFuture<String> completableFuture = new CompletableFuture();
+    new Thread(() -> {
+      try {
+        Thread.sleep(3000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      completableFuture.complete("ok");
+    }).start();
+
+    completableFuture.whenComplete((s, e) -> {
+      System.out.println(s);
+    });
+
+  }
+
+  private static void demo3() {
     Long start = System.currentTimeMillis();
     // 结果集
     List<String> list = new ArrayList<>();
@@ -32,7 +62,6 @@ public class CompletableFutureTest {
     // 封装后无返回值，必须自己whenComplete()获取
     CompletableFuture.allOf(cfs).join();
     System.out.println("list=" + list + ",耗时=" + (System.currentTimeMillis() - start));
-
   }
 
   private static Integer calc(Integer i) {
