@@ -15,9 +15,10 @@ public class CompletableFutureTest {
 
   // https://blog.csdn.net/u011726984/article/details/79320004
   public static void main(String[] args) throws Exception {
-    demo1();
-    demo2();
+    // demo1();
+    // demo2();
     demo3();
+    // demo3();
   }
 
   private static void demo1() {
@@ -44,6 +45,24 @@ public class CompletableFutureTest {
   }
 
   private static void demo3() {
+    CompletableFuture<String> completableFuture = new CompletableFuture<>();
+    new Thread(() -> {
+      try {
+        Thread.sleep(2000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      completableFuture.complete("good");
+    }).start();
+
+    try {
+      System.out.println(completableFuture.get());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private static void demo4() {
     Long start = System.currentTimeMillis();
     // 结果集
     List<String> list = new ArrayList<>();
