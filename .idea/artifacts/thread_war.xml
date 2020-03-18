@@ -1,7 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="war" name="thread:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="thread-0.1.0-SNAPSHOT.war">
+    <properties id="maven-jee-properties">
+      <options>
+        <module>thread</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="soa-spring.war">
       <element id="artifact" artifact-name="thread:war exploded" />
     </root>
   </artifact>
