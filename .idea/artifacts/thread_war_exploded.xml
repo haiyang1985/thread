@@ -13,6 +13,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="thread" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.javassist:javassist:3.26.0-GA" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/soa-spring/META-INF/MANIFEST.MF" />
